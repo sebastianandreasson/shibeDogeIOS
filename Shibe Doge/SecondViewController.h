@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SecondViewController : UIViewController <UITextFieldDelegate>
+@interface SecondViewController : UIViewController <UITextFieldDelegate, UIGestureRecognizerDelegate>
 
 @end
