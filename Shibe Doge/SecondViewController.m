@@ -167,7 +167,7 @@
 	[suchTextField setFont:[UIFont fontWithName:@"ComicSansMS" size:25]];
 	[suchTextField sizeToFit];
 	[suchTextField setFrame:CGRectMake(suchTextField.frame.origin.x - 10, suchTextField.frame.origin.y - 10, suchTextField.frame.size.width + 20, suchTextField.frame.size.height + 20)];
-	[suchTextField setTextColor:[UIColor whiteColor]];
+    [suchTextField setTextColor:[UIColor colorWithRed:(arc4random()%255)/255.0 green:(arc4random()%255)/255.0 blue:(arc4random()%255)/255.0 alpha:1]];
 	[suchTextField setCenter:center];
 	[suchTextField setTextAlignment:NSTextAlignmentCenter];
 	[suchTextField setDelegate:self];
