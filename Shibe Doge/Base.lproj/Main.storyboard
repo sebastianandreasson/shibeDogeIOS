@@ -19,7 +19,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="bv2-xz-pp0"/>
                     <connections>
-                        <segue destination="gvU-X1-Q1f" kind="push" id="cme-oI-rZo"/>
+                        <segue destination="gvU-X1-Q1f" kind="push" identifier="suchSegue" id="cme-oI-rZo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
