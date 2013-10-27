@@ -9,6 +9,7 @@
 #import "MainViewController.h"
 
 @interface MainViewController (){
+    UIImageView *background;
     UIImageView *animatedDoge;
     UILabel *title;
     
@@ -34,12 +35,16 @@
 }
 
 - (void)initViews{
-    title = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, 60)];
+    background = [[UIImageView alloc] initWithFrame:self.view.frame];
+    [background setImage:[UIImage imageNamed:@"space.jpg"]];
+    [self.view addSubview:background];
+    
+    title = [[UILabel alloc] initWithFrame:CGRectMake(0, 15, 320, 60)];
     [title setText:@"Shibe Doge"];
     [title setBackgroundColor:[UIColor clearColor]];
     [title setTextColor:[UIColor magentaColor]];
     [title setTextAlignment:NSTextAlignmentCenter];
-    [title setFont:[UIFont fontWithName:@"Comic Sans MS Bold" size:24]];
+    [title setFont:[UIFont fontWithName:@"Comic Sans MS" size:30]];
     [self.view addSubview:title];
     
     animatedDoge = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 265, 265)];
@@ -50,11 +55,13 @@
     photoButton = [[UIButton alloc] initWithFrame:CGRectMake(170, self.view.frame.size.height-64, 130, 44)];
     [photoButton setBackgroundColor:[UIColor orangeColor]];
     [photoButton setTitle:@"such photo" forState:UIControlStateNormal];
+    [[photoButton titleLabel] setFont:[UIFont fontWithName:@"Comic Sans MS" size:16]];
     [photoButton addTarget:self action:@selector(goToNextPage) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:photoButton];
     
     libraryButton = [[UIButton alloc] initWithFrame:CGRectMake(20, self.view.frame.size.height-64, 130, 44)];
     [libraryButton setBackgroundColor:[UIColor orangeColor]];
+    [[libraryButton titleLabel] setFont:[UIFont fontWithName:@"Comic Sans MS" size:16]];
     [libraryButton setTitle:@"such library" forState:UIControlStateNormal];
     [self.view addSubview:libraryButton];
 }
@@ -64,10 +71,13 @@
     int randomX = (arc4random()%(280-1))+1;
     int randomY = (arc4random()%(400-50))+50;
     int randomIndex = arc4random()%suchArray.count;
+    int randomSize = (arc4random()%(20-10))+10;
+    int randomScale = ((arc4random()%(15-10))+10)/10;
     
     UILabel *aLabel = [[UILabel alloc] initWithFrame:CGRectMake(randomX, randomY, 100, 34)];
     [aLabel setText:[suchArray objectAtIndex:randomIndex]];
     [aLabel setTextColor:[UIColor colorWithRed:(arc4random()%255)/255.0 green:(arc4random()%255)/255.0 blue:(arc4random()%255)/255.0 alpha:1]];
+    [aLabel setFont:[UIFont fontWithName:@"Comic Sans MS" size:randomSize]];
     [self.view addSubview:aLabel];
     CGRect rect = aLabel.frame;
     rect.origin.y = randomY - 40;
@@ -76,9 +86,10 @@
     
     [UIView animateWithDuration:0.0f delay:randomDelay options:UIViewAnimationOptionCurveEaseOut animations:^{
     }completion:^(BOOL finished){
-        [UIView animateWithDuration:1.2f delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        [UIView animateWithDuration:1.4f delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
             [aLabel setFrame:rect];
             [aLabel setAlpha:0];
+            aLabel.transform = CGAffineTransformMakeScale(randomScale, randomScale);
         }completion:^(BOOL finished){
             [aLabel removeFromSuperview];
         }];
