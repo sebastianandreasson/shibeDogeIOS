@@ -16,6 +16,7 @@
     UIButton *photoButton;
     UIButton *libraryButton;
     NSArray *suchArray;
+    NSArray *normalDogeArray;
     
     NSTimer *animateTimer;
     
@@ -24,12 +25,15 @@
     NSUserDefaults *defaults;
     
     UIView *dogeView;
+    UILabel *theDogeTitle;
     UIImageView *theBackground;
     UIImageView *theDoge;
     UIButton *nextDoge;
     UIButton *previousDoge;
     UIButton *doneButton;
     UIButton *cancelButton;
+    
+    int whatDoge;
 }
 
 @end
@@ -39,6 +43,7 @@
 - (void)viewDidLoad
 {
     defaults = [NSUserDefaults standardUserDefaults];
+    whatDoge = 0;
     [super viewDidLoad];
     [self.navigationController setNavigationBarHidden:YES];
     [self initViews];
@@ -46,6 +51,7 @@
     
     animateTimer = [NSTimer scheduledTimerWithTimeInterval:0.6 target:self selector:@selector(animateText) userInfo:nil repeats:YES];
     suchArray = [[NSArray alloc] initWithObjects:@"wow",@"clap",@"such app",@"so innovate",@"wow",@"wow",@"doge",@"amaze",@"such doge",@"much work", nil];
+    normalDogeArray = [[NSArray alloc] initWithObjects:@"pick me",@"such smile",@"clap",@"so nice", @"pick me", nil];
 }
 
 - (void)initViews{
@@ -86,7 +92,15 @@
     [dogeView setBackgroundColor:[UIColor blackColor]];
     [self.view addSubview:dogeView];
     
-    theBackground = [[UIImageView alloc] initWithFrame:self.view.frame];
+    theDogeTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 15, 320, 60)];
+    [theDogeTitle setText:@"Pick Doge"];
+    [theDogeTitle setBackgroundColor:[UIColor clearColor]];
+    [theDogeTitle setTextColor:[UIColor magentaColor]];
+    [theDogeTitle setTextAlignment:NSTextAlignmentCenter];
+    [theDogeTitle setFont:[UIFont fontWithName:@"Comic Sans MS" size:30]];
+    [dogeView addSubview:theDogeTitle];
+    
+    theBackground = [[UIImageView alloc] initWithFrame:CGRectMake(0, 80, 320, 320)];
     [dogeView addSubview:theBackground];
     
     theDoge = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 265, 265)];
@@ -122,14 +136,22 @@
     
     int randomX = (arc4random()%(280-1))+1;
     int randomY = (arc4random()%(400-50))+50;
-    int randomIndex = arc4random()%suchArray.count;
     int randomSize = (arc4random()%(25-12))+12;
     int randomScale = ((arc4random()%(15-10))+10)/10;
     
     UILabel *aLabel = [[UILabel alloc] initWithFrame:CGRectMake(randomX, randomY, 100, 34)];
-    [aLabel setText:[suchArray objectAtIndex:randomIndex]];
     [aLabel setTextColor:[UIColor colorWithRed:(arc4random()%255)/255.0 green:(arc4random()%255)/255.0 blue:(arc4random()%255)/255.0 alpha:1]];
     [aLabel setFont:[UIFont fontWithName:@"Comic Sans MS" size:randomSize]];
+    switch (whatDoge) {
+        case 0:
+            [aLabel setText:[suchArray objectAtIndex:arc4random()%suchArray.count]];
+            break;
+        case 1:
+            [aLabel setText:[normalDogeArray objectAtIndex:arc4random()%normalDogeArray.count]];
+            break;
+        default:
+            break;
+    }
     [aLabel sizeToFit];
     [self.view addSubview:aLabel];
     CGRect rect = aLabel.frame;
@@ -155,6 +177,7 @@
         theDoge.center = self.view.center;
     }completion:^(BOOL finished){
     }];
+    whatDoge = 1;
     [theBackground setImage:[UIImage imageWithData:[defaults objectForKey:@"image"]]];
 }
 
