@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04353A6D181D780000EE1E3F /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04353A6C181D780000EE1E3F /* SecondViewController.m */; };
 		45DAB217181D532F0029EE4A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45DAB216181D532F0029EE4A /* Foundation.framework */; };
 		45DAB219181D532F0029EE4A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45DAB218181D532F0029EE4A /* CoreGraphics.framework */; };
 		45DAB21B181D532F0029EE4A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45DAB21A181D532F0029EE4A /* UIKit.framework */; };
@@ -34,6 +35,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		04353A6B181D780000EE1E3F /* SecondViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
+		04353A6C181D780000EE1E3F /* SecondViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
 		45DAB213181D532F0029EE4A /* Shibe Doge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Shibe Doge.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		45DAB216181D532F0029EE4A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		45DAB218181D532F0029EE4A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -117,6 +120,8 @@
 				45DAB228181D532F0029EE4A /* Main.storyboard */,
 				45DAB22B181D532F0029EE4A /* MainViewController.h */,
 				45DAB22C181D532F0029EE4A /* MainViewController.m */,
+				04353A6B181D780000EE1E3F /* SecondViewController.h */,
+				04353A6C181D780000EE1E3F /* SecondViewController.m */,
 				45DAB22E181D532F0029EE4A /* Images.xcassets */,
 				45DAB21D181D532F0029EE4A /* Supporting Files */,
 			);
@@ -250,6 +255,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04353A6D181D780000EE1E3F /* SecondViewController.m in Sources */,
 				45DAB223181D532F0029EE4A /* main.m in Sources */,
 				45DAB22D181D532F0029EE4A /* MainViewController.m in Sources */,
 				45DAB227181D532F0029EE4A /* MainAppDelegate.m in Sources */,
@@ -461,6 +467,7 @@
 				45DAB247181D532F0029EE4A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		45DAB248181D532F0029EE4A /* Build configuration list for PBXNativeTarget "Shibe DogeTests" */ = {
 			isa = XCConfigurationList;
@@ -469,6 +476,7 @@
 				45DAB24A181D532F0029EE4A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
