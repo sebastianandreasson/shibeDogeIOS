@@ -27,7 +27,13 @@
     UIView *dogeView;
     UILabel *theDogeTitle;
     UIImageView *theBackground;
+    UIScrollView *dogeScrollView;
     UIImageView *theDoge;
+    UIImageView *theDoge2;
+    UIImageView *theDoge3;
+    UIImageView *theDoge4;
+    UIView *pageDogeBackground;
+    UIPageControl *pageDoge;
     UIButton *nextDoge;
     UIButton *previousDoge;
     UIButton *doneButton;
@@ -100,26 +106,58 @@
     [theDogeTitle setFont:[UIFont fontWithName:@"Comic Sans MS" size:30]];
     [dogeView addSubview:theDogeTitle];
     
+    dogeScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 80, 320, 320)];
+    [dogeScrollView setContentSize:CGSizeMake(320*4, 320)];
+    [dogeScrollView setPagingEnabled:YES];
+    dogeScrollView.delegate = self;
+    [dogeScrollView setBackgroundColor:[UIColor clearColor]];
+    [dogeScrollView setShowsHorizontalScrollIndicator:NO];
+    [dogeView addSubview:dogeScrollView];
+    
+    theDoge = [[UIImageView alloc] initWithFrame:CGRectMake(60, 50, 200, 200)];
+    [theDoge setImage:[UIImage imageNamed:@"shibeNormal.png"]];
+    [dogeScrollView addSubview:theDoge];
+    
+    theDoge2 = [[UIImageView alloc] initWithFrame:CGRectMake(60+320, 50, 200, 200)];
+    [theDoge2 setImage:[UIImage imageNamed:@"shibeNormal.png"]];
+    [dogeScrollView addSubview:theDoge2];
+    
+    theDoge3 = [[UIImageView alloc] initWithFrame:CGRectMake(60+640, 50, 200, 200)];
+    [theDoge3 setImage:[UIImage imageNamed:@"shibeNormal.png"]];
+    [dogeScrollView addSubview:theDoge3];
+    
+    theDoge4 = [[UIImageView alloc] initWithFrame:CGRectMake(60+960, 50, 200, 200)];
+    [theDoge4 setImage:[UIImage imageNamed:@"shibeNormal.png"]];
+    [dogeScrollView addSubview:theDoge4];
+    
     theBackground = [[UIImageView alloc] initWithFrame:CGRectMake(0, 80, 320, 320)];
+    [theBackground setImage:[UIImage imageNamed:@"frame.png"]];
     [dogeView addSubview:theBackground];
     
-    theDoge = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 265, 265)];
-    [theDoge setImage:[UIImage imageNamed:@"shibeNormal.png"]];
-    [theDoge setCenter:dogeView.center];
-    [dogeView addSubview:theDoge];
+    pageDogeBackground = [[UIView alloc] initWithFrame:CGRectMake(dogeView.center.x-50, dogeView.center.y+5 + (theDoge.frame.size.height/2), 100, 20)];
+    [pageDogeBackground setBackgroundColor:[UIColor blackColor]];
+    [pageDogeBackground setAlpha:0.465];
+    [dogeView addSubview:pageDogeBackground];
+    
+    pageDoge = [[UIPageControl alloc] init];
+    [pageDoge setNumberOfPages:4];
+    [pageDoge setCurrentPage:0];
+    [pageDoge setCenter:pageDogeBackground.center],
+    [dogeView addSubview:pageDoge];
+    
     
     doneButton = [[UIButton alloc] initWithFrame:CGRectMake(170, self.view.frame.size.height-64, 130, 44)];
     [doneButton setTitle:@"Next" forState:UIControlStateNormal];
     [[doneButton titleLabel] setFont:[UIFont fontWithName:@"Comic Sans MS" size:16]];
     [doneButton addTarget:self action:@selector(goToNextPage) forControlEvents:UIControlEventTouchUpInside];
-    [doneButton setBackgroundColor:[UIColor yellowColor]];
+    [doneButton setBackgroundColor:[UIColor magentaColor]];
     [dogeView addSubview:doneButton];
     
     cancelButton = [[UIButton alloc] initWithFrame:CGRectMake(20, self.view.frame.size.height-64, 130, 44)];
     [cancelButton setTitle:@"Cancel" forState:UIControlStateNormal];
     [[cancelButton titleLabel] setFont:[UIFont fontWithName:@"Comic Sans MS" size:16]];
     [cancelButton addTarget:self action:@selector(dismissDogeView) forControlEvents:UIControlEventTouchUpInside];
-    [cancelButton setBackgroundColor:[UIColor yellowColor]];
+    [cancelButton setBackgroundColor:[UIColor magentaColor]];
     [dogeView addSubview:cancelButton];
 }
 
@@ -128,8 +166,6 @@
         dogeView.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, self.view.frame.size.height);
     }completion:^(BOOL finished){
     }];
-    
-    
 }
 
 - (void)animateText{
@@ -174,15 +210,31 @@
 - (void)showDogePicker{
     [UIView animateWithDuration:0.4f delay:0 options:UIViewAnimationOptionTransitionCurlUp animations:^{
         dogeView.frame = self.view.frame;
-        theDoge.center = self.view.center;
     }completion:^(BOOL finished){
+        [pageDoge setFrame:CGRectMake(dogeView.center.x-50, dogeView.center.y+20 + (theDoge.frame.size.height/2), pageDoge.frame.size.width, pageDoge.frame.size.height)];
+        [pageDogeBackground setFrame:CGRectMake(dogeView.center.x-50, dogeView.center.y+20 + (theDoge.frame.size.height/2), 100, 20)];
+        [pageDoge setCenter:pageDogeBackground.center];
     }];
     whatDoge = 1;
-    [theBackground setImage:[UIImage imageWithData:[defaults objectForKey:@"image"]]];
 }
 
 - (void)goToNextPage{
-    [defaults setObject:UIImagePNGRepresentation(theDoge.image) forKey:@"doge"];
+    switch (pageDoge.currentPage) {
+        case 0:
+            [defaults setObject:UIImagePNGRepresentation(theDoge.image) forKey:@"doge"];
+            break;
+        case 1:
+            [defaults setObject:UIImagePNGRepresentation(theDoge2.image) forKey:@"doge"];
+            break;
+        case 2:
+            [defaults setObject:UIImagePNGRepresentation(theDoge3.image) forKey:@"doge"];
+            break;
+        case 3:
+            [defaults setObject:UIImagePNGRepresentation(theDoge4.image) forKey:@"doge"];
+            break;
+        default:
+            break;
+    }
     [self performSegueWithIdentifier:@"suchSegue" sender:nil];
 }
 
@@ -217,6 +269,20 @@
     }];
 }
 
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    if (scrollView.contentOffset.x >= 960) {
+        [pageDoge setCurrentPage:3];
+    }
+    else if (scrollView.contentOffset.x >= 640) {
+        [pageDoge setCurrentPage:2];
+    }
+    else if (scrollView.contentOffset.x >= 320) {
+        [pageDoge setCurrentPage:1];
+    }
+    else if (scrollView.contentOffset.x >= 0) {
+        [pageDoge setCurrentPage:0];
+    }
+}
 
 
 - (void)didReceiveMemoryWarning
