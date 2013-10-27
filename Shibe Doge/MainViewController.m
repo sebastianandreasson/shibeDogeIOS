@@ -182,7 +182,7 @@
 }
 
 - (void)goToNextPage{
-    [defaults setObject:theDoge.image.CIImage forKey:@"doge"];
+    [defaults setObject:UIImagePNGRepresentation(theDoge.image) forKey:@"doge"];
     [self performSegueWithIdentifier:@"suchSegue" sender:nil];
 }
 
