@@ -44,13 +44,49 @@
 {
 	NSLog(@"asd");
 	
-	UITextField *suchTextField = [[UITextField alloc]initWithFrame:CGRectMake(0, 0, 40, 20)];
+	if (contentView.subviews.count < 1)
+	{
+		[self addNewTextFieldWithCenter:CGPointMake([tap locationInView:contentView].x, [tap locationInView:contentView].y)];
+	}
+	else
+	{
+		for (UITextField *subView in contentView.subviews)
+		{
+			if ([subView isFirstResponder])
+			{
+				[subView resignFirstResponder];
+				break;
+			}
+			else
+			{
+				[self addNewTextFieldWithCenter:CGPointMake([tap locationInView:contentView].x, [tap locationInView:contentView].y)];
+				break;
+			}
+		}
+	}
+}
+
+- (void)addNewTextFieldWithCenter:(CGPoint)center
+{
+	UITextField *suchTextField = [[UITextField alloc]initWithFrame:CGRectMake(0, 0, 60, 40)];
 	[suchTextField setText:@"wow"];
-//	[suchTextField setFont:[UIFont fontWithName:@"ComicSans" size:14]];
-	[suchTextField setCenter:CGPointMake([tap locationInView:contentView].x, [tap locationInView:contentView].y)];
+	[suchTextField setFont:[UIFont fontWithName:@"ComicSansMS" size:20]];
+	[suchTextField setTextColor:[UIColor whiteColor]];
+	[suchTextField setCenter:center];
 	[contentView addSubview:suchTextField];
 }
 
+#pragma mark - UITextFieldDelegate
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+	NSLog(@"textFieldDidBeginEditing");
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+	NSLog(@"textFieldDidEndEditing");
+}
 
 - (void)didReceiveMemoryWarning
 {

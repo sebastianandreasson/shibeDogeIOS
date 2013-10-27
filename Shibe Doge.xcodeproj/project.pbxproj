@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		04353A6D181D780000EE1E3F /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04353A6C181D780000EE1E3F /* SecondViewController.m */; };
+		04353A70181D803E00EE1E3F /* Comic Sans MS Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 04353A6E181D803E00EE1E3F /* Comic Sans MS Bold.ttf */; };
+		04353A71181D803E00EE1E3F /* Comic Sans MS.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 04353A6F181D803E00EE1E3F /* Comic Sans MS.ttf */; };
 		45DAB217181D532F0029EE4A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45DAB216181D532F0029EE4A /* Foundation.framework */; };
 		45DAB219181D532F0029EE4A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45DAB218181D532F0029EE4A /* CoreGraphics.framework */; };
 		45DAB21B181D532F0029EE4A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45DAB21A181D532F0029EE4A /* UIKit.framework */; };
@@ -37,6 +39,8 @@
 /* Begin PBXFileReference section */
 		04353A6B181D780000EE1E3F /* SecondViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
 		04353A6C181D780000EE1E3F /* SecondViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
+		04353A6E181D803E00EE1E3F /* Comic Sans MS Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comic Sans MS Bold.ttf"; sourceTree = "<group>"; };
+		04353A6F181D803E00EE1E3F /* Comic Sans MS.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comic Sans MS.ttf"; sourceTree = "<group>"; };
 		45DAB213181D532F0029EE4A /* Shibe Doge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Shibe Doge.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		45DAB216181D532F0029EE4A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		45DAB218181D532F0029EE4A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -122,6 +126,8 @@
 				45DAB22C181D532F0029EE4A /* MainViewController.m */,
 				04353A6B181D780000EE1E3F /* SecondViewController.h */,
 				04353A6C181D780000EE1E3F /* SecondViewController.m */,
+				04353A6E181D803E00EE1E3F /* Comic Sans MS Bold.ttf */,
+				04353A6F181D803E00EE1E3F /* Comic Sans MS.ttf */,
 				45DAB22E181D532F0029EE4A /* Images.xcassets */,
 				45DAB21D181D532F0029EE4A /* Supporting Files */,
 			);
@@ -235,8 +241,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				45DAB22F181D532F0029EE4A /* Images.xcassets in Resources */,
+				04353A71181D803E00EE1E3F /* Comic Sans MS.ttf in Resources */,
 				45DAB221181D532F0029EE4A /* InfoPlist.strings in Resources */,
 				45DAB22A181D532F0029EE4A /* Main.storyboard in Resources */,
+				04353A70181D803E00EE1E3F /* Comic Sans MS Bold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
