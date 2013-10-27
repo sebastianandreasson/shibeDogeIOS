@@ -10,6 +10,7 @@
 		04353A6D181D780000EE1E3F /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04353A6C181D780000EE1E3F /* SecondViewController.m */; };
 		04353A70181D803E00EE1E3F /* Comic Sans MS Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 04353A6E181D803E00EE1E3F /* Comic Sans MS Bold.ttf */; };
 		04353A71181D803E00EE1E3F /* Comic Sans MS.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 04353A6F181D803E00EE1E3F /* Comic Sans MS.ttf */; };
+		45256C71181D850E0008F632 /* shibeNormal.png in Resources */ = {isa = PBXBuildFile; fileRef = 45256C70181D850E0008F632 /* shibeNormal.png */; };
 		45DAB217181D532F0029EE4A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45DAB216181D532F0029EE4A /* Foundation.framework */; };
 		45DAB219181D532F0029EE4A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45DAB218181D532F0029EE4A /* CoreGraphics.framework */; };
 		45DAB21B181D532F0029EE4A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45DAB21A181D532F0029EE4A /* UIKit.framework */; };
@@ -41,6 +42,7 @@
 		04353A6C181D780000EE1E3F /* SecondViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
 		04353A6E181D803E00EE1E3F /* Comic Sans MS Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comic Sans MS Bold.ttf"; sourceTree = "<group>"; };
 		04353A6F181D803E00EE1E3F /* Comic Sans MS.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comic Sans MS.ttf"; sourceTree = "<group>"; };
+		45256C70181D850E0008F632 /* shibeNormal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = shibeNormal.png; path = suchImagefolder/shibeNormal.png; sourceTree = "<group>"; };
 		45DAB213181D532F0029EE4A /* Shibe Doge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Shibe Doge.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		45DAB216181D532F0029EE4A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		45DAB218181D532F0029EE4A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -137,6 +139,7 @@
 		45DAB21D181D532F0029EE4A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				45256C70181D850E0008F632 /* shibeNormal.png */,
 				45DAB21E181D532F0029EE4A /* Shibe Doge-Info.plist */,
 				45DAB21F181D532F0029EE4A /* InfoPlist.strings */,
 				45DAB222181D532F0029EE4A /* main.m */,
@@ -244,6 +247,7 @@
 				04353A71181D803E00EE1E3F /* Comic Sans MS.ttf in Resources */,
 				45DAB221181D532F0029EE4A /* InfoPlist.strings in Resources */,
 				45DAB22A181D532F0029EE4A /* Main.storyboard in Resources */,
+				45256C71181D850E0008F632 /* shibeNormal.png in Resources */,
 				04353A70181D803E00EE1E3F /* Comic Sans MS Bold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
