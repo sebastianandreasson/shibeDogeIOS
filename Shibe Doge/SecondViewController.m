@@ -19,6 +19,9 @@
 	UIView *contentView;
 	BOOL editingTextField;
 	UITextField *selectedTextField;
+	
+	NSTimer *animateTimer;
+	NSArray *suchArray;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -36,12 +39,33 @@
 
 	defaults = [NSUserDefaults standardUserDefaults];
 	
+	animateTimer = [NSTimer scheduledTimerWithTimeInterval:0.6 target:self selector:@selector(animateText) userInfo:nil repeats:YES];
+
 	[self.view setBackgroundColor:[UIColor blackColor]];
 	
-	[self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageWithData:[defaults objectForKey:@"image"]]]];
+	UILabel *titleLbl = [[UILabel alloc]initWithFrame:CGRectMake(0, 20, 320, 40)];
+	[titleLbl setText:@"Tap image to add text!"];
+	[titleLbl setTextAlignment:NSTextAlignmentCenter];
+	[titleLbl setFont:[UIFont fontWithName:@"ComicSansMS" size:20]];
+	[titleLbl setTextColor:[UIColor magentaColor]];
+	[self.view addSubview:titleLbl];
 	
-	contentView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height)];
+	UILabel *titleLbl2 = [[UILabel alloc]initWithFrame:CGRectMake(0, 55, 320, 40)];
+	[titleLbl2 setText:@"Move! Turn! Zoom! Pretty!"];
+	[titleLbl2 setTextAlignment:NSTextAlignmentCenter];
+	[titleLbl2 setFont:[UIFont fontWithName:@"ComicSansMS" size:20]];
+	[titleLbl2 setTextColor:[UIColor magentaColor]];
+	[self.view addSubview:titleLbl2];
+
+//	[self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"space.jpg"]]];
+	
+	contentView = [[UIView alloc]initWithFrame:CGRectMake(0, 100, 320, 320)];
 	[self.view addSubview:contentView];
+	
+	UIImageView *bgImage = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 320, 320)];
+	[bgImage setImage:[UIImage imageWithData:[defaults objectForKey:@"image"]]];
+	[bgImage setContentMode:UIViewContentModeScaleAspectFill];
+	[contentView addSubview:bgImage];
 	
 	UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(handleTap:)];
 	[contentView addGestureRecognizer:tapGestureRecognizer];
@@ -60,6 +84,8 @@
 	[doneBtn setBackgroundColor:[UIColor greenColor]];
 	[doneBtn addTarget:self action:@selector(done) forControlEvents:UIControlEventTouchUpInside];
 	[bottomView addSubview:doneBtn];
+	
+//	suchArray = [[NSArray alloc] initWithObjects:@"wow",@"such app",@"so innovate",@"wow",@"wow",@"doge",@"amaze",@"such doge", @"much work", nil];
 }
 
 #pragma mark - Actions
@@ -164,6 +190,44 @@
 	
 	[textField sizeToFit];
 //	[textField setFrame:CGRectMake(textField.frame.origin.x, textField.frame.origin.y, textField.frame.size.width + 20, textField.frame.size.height + 20)];
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+	return UIStatusBarStyleLightContent;
+}
+
+#pragma mark - Animate Text
+
+- (void)animateText{
+    
+    int randomX = (arc4random()%(280-1))+1;
+    int randomY = (arc4random()%(560-340))+340;
+    int randomIndex = arc4random()%suchArray.count;
+    int randomSize = (arc4random()%(25-12))+12;
+    int randomScale = ((arc4random()%(15-10))+10)/10;
+    
+    UILabel *aLabel = [[UILabel alloc] initWithFrame:CGRectMake(randomX, randomY, 100, 34)];
+    [aLabel setText:[suchArray objectAtIndex:randomIndex]];
+    [aLabel setTextColor:[UIColor colorWithRed:(arc4random()%255)/255.0 green:(arc4random()%255)/255.0 blue:(arc4random()%255)/255.0 alpha:1]];
+    [aLabel setFont:[UIFont fontWithName:@"Comic Sans MS" size:randomSize]];
+    [aLabel sizeToFit];
+    [self.view addSubview:aLabel];
+    CGRect rect = aLabel.frame;
+    rect.origin.x = randomY + 40;
+    
+    int randomDelay = (arc4random()%(4-1))+1;
+    
+    [UIView animateWithDuration:0.0f delay:randomDelay options:UIViewAnimationOptionCurveEaseOut animations:^{
+    }completion:^(BOOL finished){
+        [UIView animateWithDuration:1.4f delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+            [aLabel setFrame:rect];
+            [aLabel setAlpha:0];
+            aLabel.transform = CGAffineTransformMakeScale(randomScale, randomScale);
+        }completion:^(BOOL finished){
+            [aLabel removeFromSuperview];
+        }];
+    }];
 }
 
 - (void)didReceiveMemoryWarning
