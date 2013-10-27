@@ -44,20 +44,18 @@
 	[self.view setBackgroundColor:[UIColor blackColor]];
 	
 	UILabel *titleLbl = [[UILabel alloc]initWithFrame:CGRectMake(0, 20, 320, 40)];
-	[titleLbl setText:@"Tap image to add text!"];
+	[titleLbl setText:@"tap image for add texts !"];
 	[titleLbl setTextAlignment:NSTextAlignmentCenter];
 	[titleLbl setFont:[UIFont fontWithName:@"ComicSansMS" size:20]];
 	[titleLbl setTextColor:[UIColor magentaColor]];
 	[self.view addSubview:titleLbl];
 	
 	UILabel *titleLbl2 = [[UILabel alloc]initWithFrame:CGRectMake(0, 55, 320, 40)];
-	[titleLbl2 setText:@"Move! Turn! Zoom! Pretty!"];
+	[titleLbl2 setText:@"move trn zoom pretty !!"];
 	[titleLbl2 setTextAlignment:NSTextAlignmentCenter];
 	[titleLbl2 setFont:[UIFont fontWithName:@"ComicSansMS" size:20]];
 	[titleLbl2 setTextColor:[UIColor magentaColor]];
 	[self.view addSubview:titleLbl2];
-
-//	[self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"space.jpg"]]];
 	
 	contentView = [[UIView alloc]initWithFrame:CGRectMake(0, 100, 320, 320)];
 	[self.view addSubview:contentView];
@@ -67,21 +65,41 @@
 	[bgImage setContentMode:UIViewContentModeScaleAspectFill];
 	[contentView addSubview:bgImage];
 	
+	UIImageView *dogeImg = [[UIImageView alloc]initWithFrame:CGRectMake(22.5, 122, 265, 265)];
+	[dogeImg setImage:[UIImage imageWithData:[defaults objectForKey:@"doge"]]];
+	[dogeImg setContentMode:UIViewContentModeCenter];
+	[dogeImg setUserInteractionEnabled:YES];
+	[self.view addSubview:dogeImg];
+	
+	UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(handlePan:)];
+	[panGestureRecognizer setDelegate:self];
+	[dogeImg addGestureRecognizer:panGestureRecognizer];
+	
+	UIPinchGestureRecognizer *pinchGestureRecognizer = [[UIPinchGestureRecognizer alloc]initWithTarget:self action:@selector(handlePinch:)];
+	[pinchGestureRecognizer setDelegate:self];
+	[dogeImg addGestureRecognizer:pinchGestureRecognizer];
+	
+	UIRotationGestureRecognizer *rotationGestureRecognizer = [[UIRotationGestureRecognizer alloc]initWithTarget:self action:@selector(handleRotate:)];
+	[rotationGestureRecognizer setDelegate:self];
+	[dogeImg addGestureRecognizer:rotationGestureRecognizer];
+
 	UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(handleTap:)];
 	[contentView addGestureRecognizer:tapGestureRecognizer];
 	
 	// BottomView
 	UIView *bottomView = [[UIView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height - 50, 320, 50)];
-	[bottomView setBackgroundColor:[UIColor whiteColor]];
+	[bottomView setBackgroundColor:[UIColor clearColor]];
 	[self.view addSubview:bottomView];
 	
 	UIButton *backBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 50, 50)];
-	[backBtn setBackgroundColor:[UIColor redColor]];
+//	[backBtn setBackgroundColor:[UIColor redColor]];
+	[backBtn setImage:[UIImage imageNamed:@"crossIcon.png"] forState:UIControlStateNormal];
 	[backBtn addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
 	[bottomView addSubview:backBtn];
 	
 	UIButton *doneBtn = [[UIButton alloc]initWithFrame:CGRectMake(270, 0, 50, 50)];
-	[doneBtn setBackgroundColor:[UIColor greenColor]];
+//	[doneBtn setBackgroundColor:[UIColor greenColor]];
+	[doneBtn setImage:[UIImage imageNamed:@"checkIcon.png"] forState:UIControlStateNormal];
 	[doneBtn addTarget:self action:@selector(done) forControlEvents:UIControlEventTouchUpInside];
 	[bottomView addSubview:doneBtn];
 	
@@ -117,7 +135,7 @@
 	}
 	else
 	{
-		[self addNewTextFieldWithCenter:CGPointMake([tap locationInView:contentView].x, [tap locationInView:contentView].y)];
+		[self addNewTextFieldWithCenter:CGPointMake([tap locationInView:self.view].x, [tap locationInView:self.view].y)];
 	}
 }
 
@@ -154,7 +172,7 @@
 	[suchTextField setTextAlignment:NSTextAlignmentCenter];
 	[suchTextField setDelegate:self];
 	[suchTextField addTarget:self action:@selector(textFieldValueChanged:) forControlEvents:UIControlEventEditingChanged];
-	[contentView addSubview:suchTextField];
+	[self.view addSubview:suchTextField];
 	
 	UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(handlePan:)];
 	[panGestureRecognizer setDelegate:self];

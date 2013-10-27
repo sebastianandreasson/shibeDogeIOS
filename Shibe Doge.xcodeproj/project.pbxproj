@@ -10,6 +10,8 @@
 		04353A70181D803E00EE1E3F /* Comic Sans MS Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 04353A6E181D803E00EE1E3F /* Comic Sans MS Bold.ttf */; };
 		04353A71181D803E00EE1E3F /* Comic Sans MS.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 04353A6F181D803E00EE1E3F /* Comic Sans MS.ttf */; };
 		04353A7A181DB81800EE1E3F /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04353A79181DB81800EE1E3F /* SecondViewController.m */; };
+		04353A7D181DBE7400EE1E3F /* checkIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04353A7B181DBE7400EE1E3F /* checkIcon@2x.png */; };
+		04353A7E181DBE7400EE1E3F /* crossIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04353A7C181DBE7400EE1E3F /* crossIcon@2x.png */; };
 		45256C73181D89200008F632 /* space.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 45256C72181D89200008F632 /* space.jpg */; };
 		45256C75181D8AAC0008F632 /* shibeNormal.png in Resources */ = {isa = PBXBuildFile; fileRef = 45256C74181D8AAC0008F632 /* shibeNormal.png */; };
 		45256C7C181D8ECD0008F632 /* appIcon60x60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45256C76181D8ECD0008F632 /* appIcon60x60@2x.png */; };
@@ -49,6 +51,8 @@
 		04353A6F181D803E00EE1E3F /* Comic Sans MS.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comic Sans MS.ttf"; sourceTree = "<group>"; };
 		04353A78181DB81800EE1E3F /* SecondViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
 		04353A79181DB81800EE1E3F /* SecondViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
+		04353A7B181DBE7400EE1E3F /* checkIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "checkIcon@2x.png"; path = "suchImagefolder/checkIcon@2x.png"; sourceTree = "<group>"; };
+		04353A7C181DBE7400EE1E3F /* crossIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "crossIcon@2x.png"; path = "suchImagefolder/crossIcon@2x.png"; sourceTree = "<group>"; };
 		45256C72181D89200008F632 /* space.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = space.jpg; path = suchImagefolder/space.jpg; sourceTree = "<group>"; };
 		45256C74181D8AAC0008F632 /* shibeNormal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = shibeNormal.png; path = suchImagefolder/shibeNormal.png; sourceTree = "<group>"; };
 		45256C76181D8ECD0008F632 /* appIcon60x60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "appIcon60x60@2x.png"; sourceTree = "<group>"; };
@@ -153,6 +157,8 @@
 		45DAB21D181D532F0029EE4A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				04353A7B181DBE7400EE1E3F /* checkIcon@2x.png */,
+				04353A7C181DBE7400EE1E3F /* crossIcon@2x.png */,
 				45256C76181D8ECD0008F632 /* appIcon60x60@2x.png */,
 				45256C77181D8ECD0008F632 /* appIcon40x40@2x.png */,
 				45256C78181D8ECD0008F632 /* appIcon29x29@2x.png */,
@@ -270,6 +276,8 @@
 				04353A71181D803E00EE1E3F /* Comic Sans MS.ttf in Resources */,
 				45DAB221181D532F0029EE4A /* InfoPlist.strings in Resources */,
 				45DAB22A181D532F0029EE4A /* Main.storyboard in Resources */,
+				04353A7D181DBE7400EE1E3F /* checkIcon@2x.png in Resources */,
+				04353A7E181DBE7400EE1E3F /* crossIcon@2x.png in Resources */,
 				45256C80181D8ECD0008F632 /* appIcon40x40.png in Resources */,
 				04353A70181D803E00EE1E3F /* Comic Sans MS Bold.ttf in Resources */,
 				45256C7E181D8ECD0008F632 /* appIcon29x29@2x.png in Resources */,
