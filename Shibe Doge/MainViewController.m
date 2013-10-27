@@ -22,6 +22,14 @@
     UIImagePickerController *imagePicker;
     
     NSUserDefaults *defaults;
+    
+    UIView *dogeView;
+    UIImageView *theBackground;
+    UIImageView *theDoge;
+    UIButton *nextDoge;
+    UIButton *previousDoge;
+    UIButton *doneButton;
+    UIButton *cancelButton;
 }
 
 @end
@@ -34,9 +42,10 @@
     [super viewDidLoad];
     [self.navigationController setNavigationBarHidden:YES];
     [self initViews];
+    [self initDogeView];
     
     animateTimer = [NSTimer scheduledTimerWithTimeInterval:0.6 target:self selector:@selector(animateText) userInfo:nil repeats:YES];
-    suchArray = [[NSArray alloc] initWithObjects:@"wow",@"such app",@"so innovate",@"wow",@"wow",@"doge",@"amaze",@"such doge", @"much work", nil];
+    suchArray = [[NSArray alloc] initWithObjects:@"wow",@"clap",@"such app",@"so innovate",@"wow",@"wow",@"doge",@"amaze",@"such doge",@"much work", nil];
 }
 
 - (void)initViews{
@@ -72,6 +81,43 @@
     [self.view addSubview:libraryButton];
 }
 
+- (void)initDogeView{
+    dogeView = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, self.view.frame.size.height)];
+    [dogeView setBackgroundColor:[UIColor blackColor]];
+    [self.view addSubview:dogeView];
+    
+    theBackground = [[UIImageView alloc] initWithFrame:self.view.frame];
+    [dogeView addSubview:theBackground];
+    
+    theDoge = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 265, 265)];
+    [theDoge setImage:[UIImage imageNamed:@"shibeNormal.png"]];
+    [theDoge setCenter:dogeView.center];
+    [dogeView addSubview:theDoge];
+    
+    doneButton = [[UIButton alloc] initWithFrame:CGRectMake(170, self.view.frame.size.height-64, 130, 44)];
+    [doneButton setTitle:@"Next" forState:UIControlStateNormal];
+    [[doneButton titleLabel] setFont:[UIFont fontWithName:@"Comic Sans MS" size:16]];
+    [doneButton addTarget:self action:@selector(goToNextPage) forControlEvents:UIControlEventTouchUpInside];
+    [doneButton setBackgroundColor:[UIColor yellowColor]];
+    [dogeView addSubview:doneButton];
+    
+    cancelButton = [[UIButton alloc] initWithFrame:CGRectMake(20, self.view.frame.size.height-64, 130, 44)];
+    [cancelButton setTitle:@"Cancel" forState:UIControlStateNormal];
+    [[cancelButton titleLabel] setFont:[UIFont fontWithName:@"Comic Sans MS" size:16]];
+    [cancelButton addTarget:self action:@selector(dismissDogeView) forControlEvents:UIControlEventTouchUpInside];
+    [cancelButton setBackgroundColor:[UIColor yellowColor]];
+    [dogeView addSubview:cancelButton];
+}
+
+- (void)dismissDogeView{
+    [UIView animateWithDuration:0.4f delay:0 options:UIViewAnimationOptionTransitionCurlDown animations:^{
+        dogeView.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, self.view.frame.size.height);
+    }completion:^(BOOL finished){
+    }];
+    
+    
+}
+
 - (void)animateText{
     
     int randomX = (arc4random()%(280-1))+1;
@@ -103,8 +149,17 @@
     }];
 }
 
+- (void)showDogePicker{
+    [UIView animateWithDuration:0.4f delay:0 options:UIViewAnimationOptionTransitionCurlUp animations:^{
+        dogeView.frame = self.view.frame;
+        theDoge.center = self.view.center;
+    }completion:^(BOOL finished){
+    }];
+    [theBackground setImage:[UIImage imageWithData:[defaults objectForKey:@"image"]]];
+}
 
 - (void)goToNextPage{
+    [defaults setObject:theDoge.image.CIImage forKey:@"doge"];
     [self performSegueWithIdentifier:@"suchSegue" sender:nil];
 }
 
@@ -119,11 +174,12 @@
 }
 
 - (void)photoViewLibraryButtonPressed{
-    
     imagePicker = [[UIImagePickerController alloc] init];
     imagePicker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
     imagePicker.delegate = self;
     imagePicker.allowsEditing = YES;
+    
+    [self presentViewController:imagePicker animated:YES completion:nil];
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
@@ -133,8 +189,9 @@
     [defaults setObject:libImage forKey:@"image"];
     [defaults synchronize];
     
-    [picker dismissViewControllerAnimated:YES completion:nil];
-    [self goToNextPage];
+    [picker dismissViewControllerAnimated:YES completion:^{
+        [self showDogePicker];
+    }];
 }
 
 
