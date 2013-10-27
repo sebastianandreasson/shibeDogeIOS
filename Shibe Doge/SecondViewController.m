@@ -15,6 +15,8 @@
 @implementation SecondViewController
 {
 	UIView *contentView;
+	BOOL editingTextField;
+	UITextField *selectedTextField;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -44,35 +46,28 @@
 {
 	NSLog(@"asd");
 	
-	if (contentView.subviews.count < 1)
+	if (editingTextField)
 	{
-		[self addNewTextFieldWithCenter:CGPointMake([tap locationInView:contentView].x, [tap locationInView:contentView].y)];
+		[selectedTextField resignFirstResponder];
 	}
 	else
 	{
-		for (UITextField *subView in contentView.subviews)
-		{
-			if ([subView isFirstResponder])
-			{
-				[subView resignFirstResponder];
-				break;
-			}
-			else
-			{
-				[self addNewTextFieldWithCenter:CGPointMake([tap locationInView:contentView].x, [tap locationInView:contentView].y)];
-				break;
-			}
-		}
+		[self addNewTextFieldWithCenter:CGPointMake([tap locationInView:contentView].x, [tap locationInView:contentView].y)];
 	}
 }
 
 - (void)addNewTextFieldWithCenter:(CGPoint)center
 {
-	UITextField *suchTextField = [[UITextField alloc]initWithFrame:CGRectMake(0, 0, 60, 40)];
+	UITextField *suchTextField = [[UITextField alloc]initWithFrame:CGRectMake(0, 0, 0, 0)];
 	[suchTextField setText:@"wow"];
+	[suchTextField sizeToFit];
+	[suchTextField setFrame:CGRectMake(suchTextField.frame.origin.x - 10, suchTextField.frame.origin.y - 10, suchTextField.frame.size.width + 20, suchTextField.frame.size.height + 20)];
 	[suchTextField setFont:[UIFont fontWithName:@"ComicSansMS" size:20]];
 	[suchTextField setTextColor:[UIColor whiteColor]];
 	[suchTextField setCenter:center];
+	[suchTextField setTextAlignment:NSTextAlignmentCenter];
+	[suchTextField setDelegate:self];
+	[suchTextField addTarget:self action:@selector(textFieldValueChanged:) forControlEvents:UIControlEventEditingChanged];
 	[contentView addSubview:suchTextField];
 }
 
@@ -81,11 +76,22 @@
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
 	NSLog(@"textFieldDidBeginEditing");
+	editingTextField = YES;
+	selectedTextField = textField;
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
 	NSLog(@"textFieldDidEndEditing");
+	editingTextField = NO;
+}
+
+- (void)textFieldValueChanged:(UITextField *)textField
+{
+	NSLog(@"%@", textField.text);
+	
+	[textField sizeToFit];
+	[textField setFrame:CGRectMake(textField.frame.origin.x, textField.frame.origin.y, textField.frame.size.width + 20, textField.frame.size.height + 20)];
 }
 
 - (void)didReceiveMemoryWarning
