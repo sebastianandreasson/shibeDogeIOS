@@ -18,6 +18,10 @@
     NSArray *suchArray;
     
     NSTimer *animateTimer;
+    
+    UIImagePickerController *imagePicker;
+    
+    NSUserDefaults *defaults;
 }
 
 @end
@@ -26,6 +30,7 @@
 
 - (void)viewDidLoad
 {
+    defaults = [NSUserDefaults standardUserDefaults];
     [super viewDidLoad];
     [self.navigationController setNavigationBarHidden:YES];
     [self initViews];
@@ -56,13 +61,14 @@
     [photoButton setBackgroundColor:[UIColor orangeColor]];
     [photoButton setTitle:@"such photo" forState:UIControlStateNormal];
     [[photoButton titleLabel] setFont:[UIFont fontWithName:@"Comic Sans MS" size:16]];
-    [photoButton addTarget:self action:@selector(goToNextPage) forControlEvents:UIControlEventTouchUpInside];
+    [photoButton addTarget:self action:@selector(photoViewTakePhotoButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:photoButton];
     
     libraryButton = [[UIButton alloc] initWithFrame:CGRectMake(20, self.view.frame.size.height-64, 130, 44)];
     [libraryButton setBackgroundColor:[UIColor orangeColor]];
     [[libraryButton titleLabel] setFont:[UIFont fontWithName:@"Comic Sans MS" size:16]];
     [libraryButton setTitle:@"such library" forState:UIControlStateNormal];
+    [libraryButton addTarget:self action:@selector(photoViewLibraryButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:libraryButton];
 }
 
@@ -71,13 +77,14 @@
     int randomX = (arc4random()%(280-1))+1;
     int randomY = (arc4random()%(400-50))+50;
     int randomIndex = arc4random()%suchArray.count;
-    int randomSize = (arc4random()%(20-10))+10;
+    int randomSize = (arc4random()%(25-12))+12;
     int randomScale = ((arc4random()%(15-10))+10)/10;
     
     UILabel *aLabel = [[UILabel alloc] initWithFrame:CGRectMake(randomX, randomY, 100, 34)];
     [aLabel setText:[suchArray objectAtIndex:randomIndex]];
     [aLabel setTextColor:[UIColor colorWithRed:(arc4random()%255)/255.0 green:(arc4random()%255)/255.0 blue:(arc4random()%255)/255.0 alpha:1]];
     [aLabel setFont:[UIFont fontWithName:@"Comic Sans MS" size:randomSize]];
+    [aLabel sizeToFit];
     [self.view addSubview:aLabel];
     CGRect rect = aLabel.frame;
     rect.origin.y = randomY - 40;
@@ -100,6 +107,37 @@
 - (void)goToNextPage{
     [self performSegueWithIdentifier:@"suchSegue" sender:nil];
 }
+
+
+- (void)photoViewTakePhotoButtonPressed{
+    imagePicker = [[UIImagePickerController alloc] init];
+    imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    imagePicker.delegate = self;
+    imagePicker.allowsEditing = YES;
+    
+    [self presentViewController:imagePicker animated:YES completion:nil];
+}
+
+- (void)photoViewLibraryButtonPressed{
+    
+    imagePicker = [[UIImagePickerController alloc] init];
+    imagePicker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+    imagePicker.delegate = self;
+    imagePicker.allowsEditing = YES;
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    NSData *libImage = UIImagePNGRepresentation([info objectForKey:UIImagePickerControllerEditedImage]);
+    
+    [defaults setObject:libImage forKey:@"image"];
+    [defaults synchronize];
+    
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    [self goToNextPage];
+}
+
+
 
 - (void)didReceiveMemoryWarning
 {
